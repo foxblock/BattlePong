@@ -3,6 +3,7 @@
 #include "boot.h"
 #include "../Framework/framework.h"
 #include "menu.h"
+#include "../Transitions/fadein.h"
 
 void BootUp::Begin()
 {
@@ -69,5 +70,5 @@ void BootUp::StartGame()
 {
 	delete Framework::System->ProgramStages->Pop();
 	// TODO: Boot stage
-	Framework::System->ProgramStages->Push( new Menu() );
+	Framework::System->ProgramStages->Push( new TransitionFadeIn( new Menu() ) );
 }

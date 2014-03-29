@@ -193,6 +193,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Transitions\fadein.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Framework\framework.cpp"
 				>
 			</File>
@@ -260,6 +264,10 @@
 			</File>
 			<File
 				RelativePath=".\Framework\event.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Transitions\fadein.h"
 				>
 			</File>
 			<File
