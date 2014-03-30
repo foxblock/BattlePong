@@ -70,5 +70,5 @@ void BootUp::StartGame()
 {
 	delete Framework::System->ProgramStages->Pop();
 	// TODO: Boot stage
-	Framework::System->ProgramStages->Push( new TransitionFadeIn( new Menu() ) );
+	Framework::System->ProgramStages->Push( new TransitionFadeIn( spGetFastRGB(0, 0, 0), new Menu(), 50 ) );
 }

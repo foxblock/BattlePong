@@ -1,41 +1,40 @@
 
-#include "fadein.h"
+#include "fadeacross.h"
 #include "../Framework/framework.h"
 
-TransitionFadeIn::TransitionFadeIn( Uint16 FadeFromColour, Stage* FadeInTo, Uint16 FadeFrames )
+TransitionFadeAcross::TransitionFadeAcross( Stage* FadeInTo, Uint16 FadeFrames )
 {
-	SourceColour = FadeFromColour;
 	Target = FadeInTo;
 	Target->Begin();
 	Alpha = 0;
 	FadePerUpdate = SP_ONE / FadeFrames;
 }
 
-TransitionFadeIn::~TransitionFadeIn()
+TransitionFadeAcross::~TransitionFadeAcross()
 {
 }
 
-void TransitionFadeIn::Begin()
+void TransitionFadeAcross::Begin()
 {
 }
 
-void TransitionFadeIn::Pause()
+void TransitionFadeAcross::Pause()
 {
 }
 
-void TransitionFadeIn::Resume()
+void TransitionFadeAcross::Resume()
 {
 }
 
-void TransitionFadeIn::Finish()
+void TransitionFadeAcross::Finish()
 {
 }
 
-void TransitionFadeIn::EventOccurred(Event *e)
+void TransitionFadeAcross::EventOccurred(Event *e)
 {
 }
 
-void TransitionFadeIn::Update()
+void TransitionFadeAcross::Update()
 {
 	Alpha += FadePerUpdate;
 	if( Alpha >= SP_ONE )
@@ -51,13 +50,13 @@ void TransitionFadeIn::Update()
 	}
 }
 
-void TransitionFadeIn::Render()
+void TransitionFadeAcross::Render()
 {
 	SDL_Surface* b = spGetWindowSurface();
 	SDL_Surface* t = spUniqueCopySurface( b );
 
-	// Fade from colour
-	spClearTarget( SourceColour );
+	// Fade from previous stage
+	Framework::System->ProgramStages->Previous( this )->Render();
 
 	// Buffer the next stages screen
 	spSelectRenderTarget( t );

@@ -46,6 +46,8 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
+				ObjectFile="$(IntDir)\"
+				XMLDocumentationFileName="$(IntDir)\"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -119,6 +121,8 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
+				ObjectFile="$(IntDir)\"
+				XMLDocumentationFileName="$(IntDir)\"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -189,7 +193,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game\debugstage.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Framework\event.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Transitions\fadeacross.cpp"
 				>
 			</File>
 			<File
@@ -263,7 +275,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game\debugstage.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Framework\event.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Transitions\fadeacross.h"
 				>
 			</File>
 			<File

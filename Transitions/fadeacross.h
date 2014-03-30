@@ -5,17 +5,16 @@
 #include "../Framework/graphicslib.h"
 #include "../Library/spritesheet.h"
 
-class TransitionFadeIn : public Stage
+class TransitionFadeAcross : public Stage
 {
 	private:
 		Stage* Target;
 		int Alpha;
 		int FadePerUpdate;
-		Uint16 SourceColour;
 
   public:
-		TransitionFadeIn( Uint16 FadeFromColour, Stage* FadeInTo, Uint16 FadeFrames );
-		~TransitionFadeIn();
+		TransitionFadeAcross( Stage* FadeInTo, Uint16 FadeFrames );
+		~TransitionFadeAcross();
 
     // Stage control
     virtual void Begin();
