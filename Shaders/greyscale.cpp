@@ -11,34 +11,5 @@ ShaderGreyscale::~ShaderGreyscale()
 
 void ShaderGreyscale::Apply( SDL_Surface* Target )
 {
-	// Can't greyscale paletted surface
-	if( Target->format->palette != 0 )
-	{
-		return;
-	}
-
-	// Can't lock surface for editing
-	if( SDL_MUSTLOCK( Target ) )
-	{
-		if( SDL_LockSurface( Target ) < 0 )
-		{
-			return;
-		}
-	}
-
-	Uint8 R, G, B, g;
-
-	for( int y = 0; y < Target->h; y++ )
-	{
-		for( int x = 0; x < Target->w; x++ )
-		{
-			Uint32 col = GetPixel( Target, x, y );
-
-		}
-	}
-
-	if( SDL_MUSTLOCK( Target ) )
-	{
-		SDL_UnlockSurface( Target );
-	}
+	// Luminance = (unsigned char)(((float)gsCol->r * 0.35) + ((float)gsCol->g * 0.5) + ((float)gsCol->b * 0.15));
 }
