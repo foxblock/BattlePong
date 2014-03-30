@@ -5,19 +5,17 @@
 #include "../Framework/graphicslib.h"
 #include "../Library/spritesheet.h"
 
-class Menu : public Stage
+class TransitionFadeBack : public Stage
 {
 	private:
-		int selectedItem;
-		static int selectedSway[16];
-		int selectedSwayIndex;
-		int selectedSwayDelay;
-		spFont* fontTitle;
-		spFont* fontMenuUnselected;
-		spFont* fontMenuSelected;
-		spFont* fontMenuDisabled;
+		Stage* Target;
+		Stage* Source;
+		int Alpha;
+		int FadePerUpdate;
 
   public:
+		TransitionFadeBack( Uint16 FadeFrames );
+		~TransitionFadeBack();
 
     // Stage control
     virtual void Begin();

@@ -25,4 +25,5 @@ class TransitionFadeIn : public Stage
     virtual void EventOccurred(Event *e);
     virtual void Update();
     virtual void Render();
+		virtual bool StageIsTransition();
 };

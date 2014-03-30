@@ -46,8 +46,8 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				ObjectFile="$(IntDir)\"
-				XMLDocumentationFileName="$(IntDir)\"
+				ObjectFile="$(IntDir)\obj\"
+				XMLDocumentationFileName="$(IntDir)\obj\"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -121,8 +121,8 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				ObjectFile="$(IntDir)\"
-				XMLDocumentationFileName="$(IntDir)\"
+				ObjectFile="$(IntDir)\obj\"
+				XMLDocumentationFileName="$(IntDir)\obj\"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -185,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Shaders\blur.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Game\boot.cpp"
 				>
 			</File>
@@ -205,11 +209,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Transitions\fadeback.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Transitions\fadein.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Framework\framework.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Shaders\greyscale.cpp"
 				>
 			</File>
 			<File
@@ -241,6 +253,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Shaders\shader.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Library\spritesheet.cpp"
 				>
 			</File>
@@ -267,6 +283,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Shaders\blur.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Game\boot.h"
 				>
 			</File>
@@ -287,6 +307,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Transitions\fadeback.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Transitions\fadein.h"
 				>
 			</File>
@@ -296,6 +320,10 @@
 			</File>
 			<File
 				RelativePath=".\Framework\graphicslib.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Shaders\greyscale.h"
 				>
 			</File>
 			<File
@@ -324,6 +352,10 @@
 			</File>
 			<File
 				RelativePath=".\Library\polygon.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Shaders\shader.h"
 				>
 			</File>
 			<File

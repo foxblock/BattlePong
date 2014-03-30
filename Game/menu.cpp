@@ -4,9 +4,18 @@
 #include "../Transitions/fadeacross.h"
 #include "debugstage.h"
 
+int Menu::selectedSway[16] = { -2, -1, -1,
+																0, 0, 0,
+																1, 1, 2,
+																1, 1, 0,
+																0, 0, -1,
+																-1 };
+
 void Menu::Begin()
 {
 	selectedItem = 0;
+	selectedSwayIndex = 3;
+	selectedSwayDelay = 0;
 
 	fontTitle = spFontLoad( "Resource/title.ttf", 42 );
 	spFontAdd( fontTitle, SP_FONT_GROUP_ASCII, spGetFastRGB( 255, 255, 255 ) );
@@ -82,6 +91,11 @@ void Menu::EventOccurred(Event *e)
 
 void Menu::Update()
 {
+	selectedSwayDelay = (selectedSwayDelay + 1) % 3;
+	if( selectedSwayDelay == 0 )
+	{
+		selectedSwayIndex = (selectedSwayIndex + 1) % 16;
+	}
 }
 
 void Menu::Render()
@@ -94,14 +108,19 @@ void Menu::Render()
 
 	spFontDrawMiddle( Framework::System->GetDisplayWidth() / 2, 6, -1, "Battle Pong", fontTitle );
 
-	int yPos = Framework::System->GetDisplayHeight() - ((24.0f) * 5.0f);
-	spFontDraw( 10, yPos, -1, "Single Player", ( selectedItem == 0 ? fontMenuSelected : fontMenuUnselected ) );
+	int yPos = (int)(Framework::System->GetDisplayHeight() - ((24.0f) * 5.0f));
+	spFontDraw( 10 + ( selectedItem == 0 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Single Player", ( selectedItem == 0 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
-	spFontDraw( 10, yPos, -1, "Local Two Player", ( selectedItem == 1 ? fontMenuSelected : fontMenuUnselected ) );
+	spFontDraw( 10 + ( selectedItem == 1 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Local Two Player", ( selectedItem == 1 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
-	spFontDraw( 10, yPos, -1, "Network Two Player", ( selectedItem == 2 ? fontMenuSelected : fontMenuUnselected ) );
+	spFontDraw( 10 + ( selectedItem == 2 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Network Two Player", ( selectedItem == 2 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
-	spFontDraw( 10, yPos, -1, "Quit", ( selectedItem == 3 ? fontMenuSelected : fontMenuUnselected ) );
+	spFontDraw( 10 + ( selectedItem == 3 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 3 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 
+}
+
+bool Menu::StageIsTransition()
+{
+	return false;
 }

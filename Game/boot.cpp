@@ -72,3 +72,8 @@ void BootUp::StartGame()
 	// TODO: Boot stage
 	Framework::System->ProgramStages->Push( new TransitionFadeIn( spGetFastRGB(0, 0, 0), new Menu(), 50 ) );
 }
+
+bool BootUp::StageIsTransition()
+{
+	return false;
+}

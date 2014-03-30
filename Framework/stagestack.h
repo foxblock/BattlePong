@@ -12,12 +12,13 @@ class StageStack
 
   public:
     StageStack();
-    int Push(Stage* newStage);
+    int Push( Stage* newStage );
     Stage* Pop();
     Stage* Current();
     int GetStackIndex();
     Stage* Item(int index);
 		Stage* Previous( Stage* checkStage );
+		Stage* Previous( Stage* checkStage, bool includeTransitions );
 		bool IsEmpty();
 
 };

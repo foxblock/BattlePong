@@ -59,13 +59,35 @@ Stage* StageStack::Item(int index)
 
 Stage* StageStack::Previous( Stage* checkStage )
 {
+	return Previous( checkStage, false );
+}
+
+Stage* StageStack::Previous( Stage* checkStage, bool includeTransitions )
+{
   if( StackIndex < 0 )
     return 0;
 
-	for( int i = 0; i <= StackIndex; i++ )
+	for( int i = StackIndex; i >= 0; i-- )
 	{
-		if( Stack[i] == checkStage && i != 0 )
-			return Stack[i-1];
+		if( Stack[i] == checkStage )
+		{
+			if( i == 0 )
+			{
+				return 0;
+			}
+			if( includeTransitions )
+			{
+				return Stack[i-1];
+			} else {
+				for( int j = i - 1; j >= 0; j-- )
+				{
+					if( !Stack[j]->StageIsTransition() )
+					{
+						return Stack[j];
+					}
+				}
+			}
+		}
 	}
 
   return 0;

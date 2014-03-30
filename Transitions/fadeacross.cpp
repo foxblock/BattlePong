@@ -41,7 +41,7 @@ void TransitionFadeAcross::Update()
 	{
 		// Swap to new stage
 		Stage* t = Target;
-		delete Framework::System->ProgramStages->Pop();
+		delete Framework::System->ProgramStages->Pop();		// Remove transition stage (this)
 		t->Finish();
 		Framework::System->ProgramStages->Push( t );
 	} else {
@@ -71,4 +71,9 @@ void TransitionFadeAcross::Render()
 	spSetBlending( SP_ONE );
 
 	spDeleteSurface( t );
+}
+
+bool TransitionFadeAcross::StageIsTransition()
+{
+	return true;
 }
