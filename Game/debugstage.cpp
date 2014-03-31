@@ -7,7 +7,7 @@
 void DebugStage::Begin()
 {
 	ballPosition = new Vector2( Framework::System->GetDisplayWidth() / 2.0f, Framework::System->GetDisplayHeight() / 2.0f );
-	ballDirection = new Angle( rand() % 360 );
+	ballDirection = new Angle( 80 ); // rand() % 360 );
 }
 
 void DebugStage::Pause()
@@ -40,22 +40,43 @@ void DebugStage::Update()
 	if( ballPosition->X < 0 )
 	{
 		ballPosition->X = abs(ballPosition->X);
-		ballDirection->Add( 90 );
+		if( ballDirection->ToDegrees() < 180.0f )
+		{
+			ballDirection->Add( ballDirection->ShortestAngleTo(90.0f) * -2.0f );
+		} else {
+			ballDirection->Add( (270.0f - ballDirection->ToDegrees()) * 2.0f );
+		}
 	}
 	if( ballPosition->X >= Framework::System->GetDisplayWidth() )
 	{
 		ballPosition->X -= ballPosition->X - Framework::System->GetDisplayWidth();
-		ballDirection->Add( 90 );
+		if( ballDirection->ToDegrees() > 270.0f )
+		{
+			ballDirection->Add( ballDirection->ShortestAngleTo(270.0f) * -2.0f );
+		} else {
+			ballDirection->Add( 180.0f - (ballDirection->ToDegrees() * 2.0f) );
+		}
 	}
 	if( ballPosition->Y < 0 )
 	{
 		ballPosition->Y = abs(ballPosition->Y);
-		ballDirection->Add( 90 );
+		if( ballDirection->ToDegrees() < 270.0f )
+		{
+			ballDirection->Add( ballDirection->ShortestAngleTo(180.0f) * -2.0f );
+		} else {
+			ballDirection->Add( (360.0f - ballDirection->ToDegrees()) * 2.0f );
+		}
 	}
 	if( ballPosition->Y >= Framework::System->GetDisplayHeight() )
 	{
 		ballPosition->Y -= ballPosition->Y - Framework::System->GetDisplayHeight();
-		ballDirection->Add( 90 );
+		if( ballDirection->ToDegrees() > 90.0f )
+		{
+			ballDirection->Add( ballDirection->ShortestAngleTo(270.0f) * -2.0f );
+		} else {
+			ballDirection->Add( 360.0f - (ballDirection->ToDegrees() * 2.0f) );
+		}
+
 	}
 }
 

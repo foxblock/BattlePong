@@ -17,8 +17,8 @@ Vector2::Vector2( float AngleDegrees )
 {
 	float rotSin = sin(AngleDegrees * (M_PI / 180.0f));
 	float rotCos = cos(AngleDegrees * (M_PI / 180.0f));
-	X = rotCos - rotSin;
-	Y = rotCos + rotSin;
+	X = rotCos;
+	Y = rotSin;
 }
 
 void Vector2::RotateVector( float AngleDegrees )
