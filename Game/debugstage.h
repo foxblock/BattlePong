@@ -4,10 +4,13 @@
 #include "../Framework/stage.h"
 #include "../Framework/graphicslib.h"
 #include "../Library/spritesheet.h"
+#include "../Library/vector2.h"
 
 class DebugStage : public Stage
 {
 	private:
+		Vector2* ballPosition;
+		Angle* ballDirection;
 
   public:
     // Stage control

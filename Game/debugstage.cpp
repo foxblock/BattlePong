@@ -6,6 +6,8 @@
 
 void DebugStage::Begin()
 {
+	ballPosition = new Vector2( Framework::System->GetDisplayWidth() / 2.0f, Framework::System->GetDisplayHeight() / 2.0f );
+	ballDirection = new Angle( rand() % 360 );
 }
 
 void DebugStage::Pause()
@@ -34,6 +36,27 @@ void DebugStage::EventOccurred(Event *e)
 
 void DebugStage::Update()
 {
+	ballPosition->Add( new Vector2( ballDirection->ToDegrees() ) );
+	if( ballPosition->X < 0 )
+	{
+		ballPosition->X = abs(ballPosition->X);
+		ballDirection->Add( 90 );
+	}
+	if( ballPosition->X >= Framework::System->GetDisplayWidth() )
+	{
+		ballPosition->X -= ballPosition->X - Framework::System->GetDisplayWidth();
+		ballDirection->Add( 90 );
+	}
+	if( ballPosition->Y < 0 )
+	{
+		ballPosition->Y = abs(ballPosition->Y);
+		ballDirection->Add( 90 );
+	}
+	if( ballPosition->Y >= Framework::System->GetDisplayHeight() )
+	{
+		ballPosition->Y -= ballPosition->Y - Framework::System->GetDisplayHeight();
+		ballDirection->Add( 90 );
+	}
 }
 
 void DebugStage::Render()
@@ -50,6 +73,8 @@ void DebugStage::Render()
 	{
 		spRectangle( Framework::System->GetDisplayWidth() / 2, (Framework::System->GetDisplayHeight() / 10) * y, -1, 4, Framework::System->GetDisplayHeight() / 15, spGetFastRGB( 255, 255, 255 ) );
 	}
+
+	spEllipse( ballPosition->X, ballPosition->Y, -1, 10, 10, spGetFastRGB( 255, 255, 255 ) );
 }
 
 bool DebugStage::StageIsTransition()

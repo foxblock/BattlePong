@@ -119,9 +119,9 @@ void Menu::Render()
 	spFontDraw( 10 + ( selectedItem == 3 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 3 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 
-	ShaderGreyscale* shader = new ShaderGreyscale();
-	shader->Apply( spGetRenderTarget() );
-	delete shader;
+	//ShaderGreyscale* shader = new ShaderGreyscale();
+	//shader->Apply( spGetRenderTarget() );
+	//delete shader;
 }
 
 bool Menu::StageIsTransition()
