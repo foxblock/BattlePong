@@ -19,7 +19,7 @@ void ShaderGreyscale::Apply( SDL_Surface* Target )
 		{
 			ShaderARBG pxl = map[(y * Target->w) + x];
 #ifdef PANDORA
-			map[(y * Target->w) + x].r = (pxl.r / 4) + (pxl.g >> 1) + (pxl.b / 8);	// Faster but inaccurate
+			map[(y * Target->w) + x].r = (pxl.r >> 2) + (pxl.g >> 1) + (pxl.b >> 3);	// Faster but inaccurate
 #else
 			map[(y * Target->w) + x].r = ((float)pxl.r * 0.35f) + ((float)pxl.g * 0.5) + ((float)pxl.b * 0.15f);
 #endif
