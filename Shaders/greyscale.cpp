@@ -1,4 +1,3 @@
-
 #include "greyscale.h"
 
 ShaderGreyscale::ShaderGreyscale()
@@ -19,7 +18,11 @@ void ShaderGreyscale::Apply( SDL_Surface* Target )
 		for( int x = 0; x < Target->w; x++ )
 		{
 			ShaderARBG pxl = map[(y * Target->w) + x];
-			map[(y * Target->w) + x].r = ((float)pxl.r * 0.35f) + ((float)pxl.g * 0.5) + ((float)pxl.b * 0.15);
+#ifdef PANDORA
+			map[(y * Target->w) + x].r = (pxl.r / 4) + (pxl.g >> 1) + (pxl.b / 8);	// Faster but inaccurate
+#else
+			map[(y * Target->w) + x].r = ((float)pxl.r * 0.35f) + ((float)pxl.g * 0.5) + ((float)pxl.b * 0.15f);
+#endif
 			map[(y * Target->w) + x].g = map[(y * Target->w) + x].r;
 			map[(y * Target->w) + x].b = map[(y * Target->w) + x].r;
 
