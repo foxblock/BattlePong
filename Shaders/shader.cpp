@@ -1,5 +1,5 @@
 
-#include "blur.h"
+#include "shader.h"
 
 Shader::Shader()
 {
@@ -37,7 +37,7 @@ ShaderARBG* Shader::GetARGBMap( SDL_Surface* surface )
 	{
 		if( SDL_LockSurface( converted ) < 0 )
 		{
-			SDL_DeleteSurface( converted );
+			spDeleteSurface( converted );
 			return 0;
 		}
 	}
@@ -60,7 +60,7 @@ ShaderARBG* Shader::GetARGBMap( SDL_Surface* surface )
 	{
 		SDL_UnlockSurface( converted );
 	}
-	SDL_DeleteSurface( converted );
+	spDeleteSurface( converted );
 	return map;
 }
 
@@ -70,8 +70,7 @@ void Shader::SetARGBMap( SDL_Surface* surface, ShaderARBG* argbmap )
 	SDL_Surface* converted = 0;
 
 	// Create surface from argb map
-	temporary = SDL_CreateRGBSurfaceFrom( (void*)argbmap, surface->w, surface->h, 32, converted->w * genericFormat.BytesPerPixel, genericFormat.Rmask, genericFormat.Gmask, genericFormat.Bmask, genericFormat.Amask );
-	free( (void*)argbmap );
+	temporary = SDL_CreateRGBSurfaceFrom( (void*)argbmap, surface->w, surface->h, 32, surface->w * genericFormat.BytesPerPixel, genericFormat.Rmask, genericFormat.Gmask, genericFormat.Bmask, genericFormat.Amask );
 	if( temporary == 0 )
 	{
 		return;
@@ -79,7 +78,8 @@ void Shader::SetARGBMap( SDL_Surface* surface, ShaderARBG* argbmap )
 
 	// Convert surface to destination format
 	converted = SDL_ConvertSurface( temporary, surface->format, SDL_SWSURFACE );
-	SDL_DeleteSurface( temporary );
+	spDeleteSurface( temporary );
+	free( (void*)argbmap );
 	if( converted == 0 )
 	{
 		return;
@@ -90,16 +90,16 @@ void Shader::SetARGBMap( SDL_Surface* surface, ShaderARBG* argbmap )
 	{
 		if( SDL_LockSurface( converted ) < 0 )
 		{
-			SDL_DeleteSurface( converted );
-			return 0;
+			spDeleteSurface( converted );
+			return;
 		}
 	}
 	if( SDL_MUSTLOCK( surface ) )
 	{
 		if( SDL_LockSurface( surface ) < 0 )
 		{
-			SDL_DeleteSurface( converted );
-			return 0;
+			spDeleteSurface( converted );
+			return;
 		}
 	}
 
@@ -111,7 +111,7 @@ void Shader::SetARGBMap( SDL_Surface* surface, ShaderARBG* argbmap )
 	{
 		SDL_UnlockSurface( converted );
 	}
-	SDL_DeleteSurface( converted );
+	spDeleteSurface( converted );
 
 	if( SDL_MUSTLOCK( surface ) )
 	{
