@@ -7,7 +7,8 @@
 void DebugStage::Begin()
 {
 	ballPosition = new Vector2( Framework::System->GetDisplayWidth() / 2.0f, Framework::System->GetDisplayHeight() / 2.0f );
-	ballDirection = new Angle( 80 ); // rand() % 360 );
+	ballDirection = new Angle( 30 ); // rand() % 360 );
+	ballVelocity = 7.0f;
 }
 
 void DebugStage::Pause()
@@ -31,12 +32,24 @@ void DebugStage::EventOccurred(Event *e)
 			//delete Framework::System->ProgramStages->Pop();
 			Framework::System->ProgramStages->Push( new TransitionFadeBack( 10 ) );
 		}
+		if( e->Data.Keyboard.keysym.sym == SDLK_HOME )
+		{
+			ballVelocity = ballVelocity - 0.5f;
+		}
+		if( e->Data.Keyboard.keysym.sym == SDLK_END )
+		{
+			ballVelocity = ballVelocity + 0.5f;
+		}
 	}
 }
 
 void DebugStage::Update()
 {
-	ballPosition->Add( new Vector2( ballDirection->ToDegrees() ) );
+	Vector2* v = new Vector2( ballDirection->ToDegrees() );
+	v->Multiply( ballVelocity );
+	ballPosition->Add( v );
+	delete v;
+
 	if( ballPosition->X < 0 )
 	{
 		ballPosition->X = abs(ballPosition->X);
@@ -72,7 +85,7 @@ void DebugStage::Update()
 		ballPosition->Y -= ballPosition->Y - Framework::System->GetDisplayHeight();
 		if( ballDirection->ToDegrees() > 90.0f )
 		{
-			ballDirection->Add( ballDirection->ShortestAngleTo(270.0f) * -2.0f );
+			ballDirection->Add( ballDirection->ShortestAngleTo(180.0f) * 2.0f );
 		} else {
 			ballDirection->Add( 360.0f - (ballDirection->ToDegrees() * 2.0f) );
 		}

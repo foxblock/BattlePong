@@ -11,6 +11,7 @@ class DebugStage : public Stage
 	private:
 		Vector2* ballPosition;
 		Angle* ballDirection;
+		float ballVelocity;
 
   public:
     // Stage control
