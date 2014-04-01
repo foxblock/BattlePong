@@ -205,11 +205,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Transitions\fadeacross.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Transitions\fadeback.cpp"
+				RelativePath=".\Transitions\fade.cpp"
 				>
 			</File>
 			<File
@@ -265,6 +261,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Transitions\strips.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Library\vector2.cpp"
 				>
 			</File>
@@ -303,11 +303,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Transitions\fadeacross.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Transitions\fadeback.h"
+				RelativePath=".\Transitions\fade.h"
 				>
 			</File>
 			<File
@@ -368,6 +364,10 @@
 			</File>
 			<File
 				RelativePath=".\Framework\stagestack.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Transitions\strips.h"
 				>
 			</File>
 			<File

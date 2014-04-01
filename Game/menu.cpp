@@ -1,7 +1,7 @@
 
 #include "menu.h"
 #include "../Framework/framework.h"
-#include "../Transitions/fadeacross.h"
+#include "../Transitions/fade.h"
 #include "debugstage.h"
 #include "../Shaders/greyscale.h"
 
@@ -72,7 +72,7 @@ void Menu::EventOccurred(Event *e)
 				switch( selectedItem )
 				{
 					case 0:
-						Framework::System->ProgramStages->Push( new TransitionFadeAcross( new DebugStage(), 20 ) );
+						Framework::System->ProgramStages->Push( new TransitionFade( new DebugStage(), 20 ) );
 						break;
 					case 1:
 						break;

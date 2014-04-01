@@ -2,7 +2,7 @@
 #include "debugstage.h"
 #include "../Framework/framework.h"
 #include "menu.h"
-#include "../Transitions/fadeback.h"
+#include "../Transitions/strips.h" // fade.h"
 
 void DebugStage::Begin()
 {
@@ -30,7 +30,7 @@ void DebugStage::EventOccurred(Event *e)
 		if( e->Data.Keyboard.keysym.sym == SDLK_ESCAPE )
 		{
 			//delete Framework::System->ProgramStages->Pop();
-			Framework::System->ProgramStages->Push( new TransitionFadeBack( 10 ) );
+			Framework::System->ProgramStages->Push( new TransitionStrips( 120, 6 ) );
 		}
 		if( e->Data.Keyboard.keysym.sym == SDLK_HOME )
 		{
