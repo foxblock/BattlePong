@@ -21,7 +21,7 @@ class Arena
 
 		Player* Player1;
 		Player* Player2;
-		Ball* GameBall;
+		Ball* PlayBall;
 
 		Arena();
 		void Update();

@@ -58,10 +58,10 @@ void Menu::EventOccurred(Event *e)
 				return;
 
 			case SDLK_DOWN:
-				selectedItem = (selectedItem + 1) % 4;
+				selectedItem = (selectedItem + 1) % 5;
 				break;
 			case SDLK_UP:
-				selectedItem = (selectedItem + 3) % 4;
+				selectedItem = (selectedItem + 4) % 5;
 				break;
 
 			case SDLK_RETURN:
@@ -79,6 +79,8 @@ void Menu::EventOccurred(Event *e)
 					case 2:
 						break;
 					case 3:
+						break;
+					case 4:
 						delete Framework::System->ProgramStages->Pop();
 						break;
 				}
@@ -109,19 +111,23 @@ void Menu::Render()
 
 	spFontDrawMiddle( Framework::System->GetDisplayWidth() / 2, 6, -1, "Battle Pong", fontTitle );
 
-	int yPos = (int)(Framework::System->GetDisplayHeight() - ((24.0f) * 5.0f));
+	int yPos = Framework::System->GetDisplayHeight() - (24 * 6);
 	spFontDraw( 10 + ( selectedItem == 0 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Single Player", ( selectedItem == 0 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 	spFontDraw( 10 + ( selectedItem == 1 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Local Two Player", ( selectedItem == 1 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 	spFontDraw( 10 + ( selectedItem == 2 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Network Two Player", ( selectedItem == 2 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
-	spFontDraw( 10 + ( selectedItem == 3 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 3 ? fontMenuSelected : fontMenuUnselected ) );
+	spFontDraw( 10 + ( selectedItem == 3 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Settings", ( selectedItem == 3 ? fontMenuSelected : fontMenuUnselected ) );
+	yPos += 24;
+	spFontDraw( 10 + ( selectedItem == 4 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 4 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 
-	//ShaderGreyscale* shader = new ShaderGreyscale();
-	//shader->Apply( spGetRenderTarget() );
-	//delete shader;
+	/*
+	ShaderGreyscale* shader = new ShaderGreyscale();
+	shader->Apply( spGetRenderTarget() );
+	delete shader;
+	*/
 }
 
 bool Menu::StageIsTransition()

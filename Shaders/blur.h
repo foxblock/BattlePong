@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "../Framework/graphicslib.h"
+#include "shader.h"
 
-class ShaderBlur
+class ShaderBlur : public Shader
 {
 	private:
 

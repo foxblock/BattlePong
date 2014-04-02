@@ -6,17 +6,12 @@
 #include "../Library/spritesheet.h"
 #include "../Library/vector2.h"
 
+#include "arena.h"
+
 class DebugStage : public Stage
 {
 	private:
-		Vector2* ballPosition;
-		Angle* ballDirection;
-		float ballVelocity;
-
-		int roofY;
-		int floorY;
-		int player1wallX;
-		int player2wallX;
+		Arena* playArena;
 
   public:
     // Stage control

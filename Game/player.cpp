@@ -1,6 +1,8 @@
 
 #include "player.h"
 #include "arena.h"
+#include "ball.h"
+#include "../Framework/framework.h"
 
 Player::Player( Arena* PlayingArena, bool LeftSide )
 {
@@ -15,6 +17,10 @@ Player::Player( Arena* PlayingArena, bool LeftSide )
 
 void Player::Render()
 {
+	int xPos = (FacesLeft ? gameArena->Player2WallX - gameArena->PlayerFromWallX : gameArena->Player1WallX + gameArena->PlayerFromWallX);
+	spSetHorizontalOrigin( SP_CENTER );
+	spSetVerticalOrigin( SP_CENTER );
+	spRectangle( xPos, Position, -1, 8, 100, spGetFastRGB( 255, 255, 255 ) );
 }
 
 bool Player::DoesCollideWithBall()
@@ -26,4 +32,9 @@ float Player::GetCollisionReboundDirection()
 {
 	// Calculated when checking collision
 	return reboundDirection;
+}
+
+int Player::GetPlayerInput()
+{
+	return PLAYER_CONTROLS_NONE;
 }
