@@ -185,6 +185,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game\arena.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\ball.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Shaders\blur.cpp"
 				>
 			</File>
@@ -245,6 +253,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game\player.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Library\polygon.cpp"
 				>
 			</File>
@@ -280,6 +292,14 @@
 			</File>
 			<File
 				RelativePath=".\Library\animation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\arena.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\ball.h"
 				>
 			</File>
 			<File
@@ -344,6 +364,10 @@
 			</File>
 			<File
 				RelativePath=".\Framework\network.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\player.h"
 				>
 			</File>
 			<File

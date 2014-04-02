@@ -13,6 +13,11 @@ class DebugStage : public Stage
 		Angle* ballDirection;
 		float ballVelocity;
 
+		int roofY;
+		int floorY;
+		int player1wallX;
+		int player2wallX;
+
   public:
     // Stage control
     virtual void Begin();

@@ -9,6 +9,10 @@ void DebugStage::Begin()
 	ballPosition = new Vector2( Framework::System->GetDisplayWidth() / 2.0f, Framework::System->GetDisplayHeight() / 2.0f );
 	ballDirection = new Angle( 30 ); // rand() % 360 );
 	ballVelocity = 7.0f;
+	roofY = 10;
+	floorY = Framework::System->GetDisplayHeight() - 10;
+	player1wallX = 0;
+	player2wallX = Framework::System->GetDisplayWidth();
 }
 
 void DebugStage::Pause()
@@ -30,7 +34,7 @@ void DebugStage::EventOccurred(Event *e)
 		if( e->Data.Keyboard.keysym.sym == SDLK_ESCAPE )
 		{
 			//delete Framework::System->ProgramStages->Pop();
-			Framework::System->ProgramStages->Push( new TransitionStrips( 120, 6 ) );
+			Framework::System->ProgramStages->Push( new TransitionStrips( 40, 12 ) );
 		}
 		if( e->Data.Keyboard.keysym.sym == SDLK_HOME )
 		{
@@ -50,9 +54,9 @@ void DebugStage::Update()
 	ballPosition->Add( v );
 	delete v;
 
-	if( ballPosition->X < 0 )
+	if( ballPosition->X < player1wallX )
 	{
-		ballPosition->X = abs(ballPosition->X);
+		ballPosition->X = player1wallX - (ballPosition->X - player1wallX);
 		if( ballDirection->ToDegrees() < 180.0f )
 		{
 			ballDirection->Add( ballDirection->ShortestAngleTo(90.0f) * -2.0f );
@@ -60,9 +64,9 @@ void DebugStage::Update()
 			ballDirection->Add( (270.0f - ballDirection->ToDegrees()) * 2.0f );
 		}
 	}
-	if( ballPosition->X >= Framework::System->GetDisplayWidth() )
+	if( ballPosition->X >= player2wallX )
 	{
-		ballPosition->X -= ballPosition->X - Framework::System->GetDisplayWidth();
+		ballPosition->X -= ballPosition->X - player2wallX;
 		if( ballDirection->ToDegrees() > 270.0f )
 		{
 			ballDirection->Add( ballDirection->ShortestAngleTo(270.0f) * -2.0f );
@@ -70,9 +74,9 @@ void DebugStage::Update()
 			ballDirection->Add( 180.0f - (ballDirection->ToDegrees() * 2.0f) );
 		}
 	}
-	if( ballPosition->Y < 0 )
+	if( ballPosition->Y < roofY )
 	{
-		ballPosition->Y = abs(ballPosition->Y);
+		ballPosition->Y = roofY - (ballPosition->Y - roofY);
 		if( ballDirection->ToDegrees() < 270.0f )
 		{
 			ballDirection->Add( ballDirection->ShortestAngleTo(180.0f) * -2.0f );
@@ -80,9 +84,9 @@ void DebugStage::Update()
 			ballDirection->Add( (360.0f - ballDirection->ToDegrees()) * 2.0f );
 		}
 	}
-	if( ballPosition->Y >= Framework::System->GetDisplayHeight() )
+	if( ballPosition->Y >= floorY )
 	{
-		ballPosition->Y -= ballPosition->Y - Framework::System->GetDisplayHeight();
+		ballPosition->Y -= ballPosition->Y - floorY;
 		if( ballDirection->ToDegrees() > 90.0f )
 		{
 			ballDirection->Add( ballDirection->ShortestAngleTo(180.0f) * 2.0f );
