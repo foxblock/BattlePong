@@ -2,6 +2,7 @@
 #pragma once
 
 #include "vector2.h"
+#include "angle.h"
 
 class Line
 {
@@ -20,4 +21,6 @@ class Line
 
 		Vector2* GetIntersection( Line* IntersectsWith );
 		Vector2* ToVector();
+
+		Angle* Reflection( Line* Projection );
 };

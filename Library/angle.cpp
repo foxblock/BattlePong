@@ -1,7 +1,6 @@
 
 #include "angle.h"
 #include "vector2.h"
-#include <cmath>
 #include "../Framework/graphicslib.h"
 
 Angle::Angle()
@@ -26,6 +25,11 @@ void Angle::Add( float Degrees )
 	{
 		curAngle += 360.0f;
 	}
+}
+
+void Angle::Set( float Degrees )
+{
+	curAngle = Degrees;
 }
 
 float Angle::ToDegrees()

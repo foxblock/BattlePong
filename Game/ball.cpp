@@ -89,7 +89,7 @@ void Ball::Update()
 		Vector2* pContact = ballPath->GetIntersection( pArea );
 		if( pContact != 0 )
 		{
-
+			/*
 			if( ballDirection->ToDegrees() < 180.0f && ballDirection->ToDegrees() > 90.0f )
 			{
 				ballDirection->Add( ballDirection->ShortestAngleTo(90.0f) * -2.0f );
@@ -104,6 +104,10 @@ void Ball::Update()
 				ballDirection->Add( 180.0f - (ballDirection->ToDegrees() * 2.0f) );
 				ballPosition->X -= (ballPosition->X - pContact->X) * 2.0f;
 			}
+			*/
+			Angle* a = pArea->Reflection( ballPath );
+			ballDirection->Set( a->ToDegrees() );
+			delete a;
 
 		}
 	}

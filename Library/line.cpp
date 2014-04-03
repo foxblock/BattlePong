@@ -108,3 +108,41 @@ Vector2* Line::ToVector()
 {
 	return new Vector2( Points[1]->X - Points[0]->X, Points[1]->Y - Points[0]->Y );
 }
+
+Angle* Line::Reflection( Line* Projection )
+{
+	// Lines don't intersect, no reflection
+	Vector2* collision = GetIntersection( Projection );
+	Angle* result = 0;
+
+	if( collision == 0 )
+	{
+		return 0;
+	}
+
+	result = new Angle( collision->AngleTo( Projection->Points[0] ) );
+	float angToLineL = collision->AngleTo( Points[0] ) + 90.0f;
+	float angToLineR = collision->AngleTo( Points[0] ) - 90.0f;		// Do I need this?
+
+	if( result->ShortestAngleTo( angToLineL ) < 90.0f )
+	{
+		// Closer to top edge
+		if( result->ClockwiseShortestTo( angToLineL ) )
+		{
+			result->Add( result->ShortestAngleTo( angToLineL ) * 2.0f );
+		} else {
+			result->Add( result->ShortestAngleTo( angToLineL ) * -2.0f );
+		}
+	} else {
+		// Closer to top edge
+		if( result->ClockwiseShortestTo( angToLineR ) )
+		{
+			result->Add( result->ShortestAngleTo( angToLineR ) * 2.0f );
+		} else {
+			result->Add( result->ShortestAngleTo( angToLineR ) * -2.0f );
+		}
+	}
+
+	delete collision;
+	return result;
+}

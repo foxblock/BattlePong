@@ -2,6 +2,7 @@
 #pragma once
 
 #include "maths.h"
+#include "vector2.h"
 
 class Angle
 {
@@ -11,7 +12,10 @@ class Angle
 	public:
 		Angle();
 		Angle( float Degrees );
+
 		void Add( float Degrees );
+		void Set( float Degrees );
+
 		float ToDegrees();
 		float ToRadians();
 		float ToRadiansSparrow();
