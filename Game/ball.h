@@ -15,6 +15,7 @@ class Ball
 		Vector2* ballPosition;
 		Angle* ballDirection;
 		float ballVelocity;
+		int ballRadius;
 
 	public:
 		Ball(Arena* PlayingArena);

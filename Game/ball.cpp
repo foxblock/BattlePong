@@ -11,6 +11,7 @@ Ball::Ball( Arena* PlayingArena )
 	ballPosition = new Vector2( ((gameArena->Player2WallX - gameArena->Player1WallX) / 2.0f) + gameArena->Player1WallX, ((gameArena->FloorY - gameArena->RoofY) / 2.0f) + gameArena->RoofY );
 	ballDirection = new Angle( rand() % 360 );
 	ballVelocity = 4.0f;
+	ballRadius = 5;
 }
 
 void Ball::Update()
@@ -76,12 +77,19 @@ void Ball::Update()
 	// Check collisions with players
 	Line* ballPath = new Line( prevPosition, ballPosition );
 	Line* pArea = 0;
+	bool ballAdjustXLeft;
 	if( ballDirection->ToDegrees() > 90.0f && ballDirection->ToDegrees() < 270.0f && gameArena->Player1 != 0 )
 	{
+		ballPath->Points[0]->X -= ballRadius;
+		ballPath->Points[1]->X -= ballRadius;
+		ballAdjustXLeft = true;
 		pArea = gameArena->Player1->GetCollisionLine();
 	}
 	if( (ballDirection->ToDegrees() < 90.0f || ballDirection->ToDegrees() > 270.0f) && gameArena->Player2 != 0 )
 	{
+		ballPath->Points[0]->X += ballRadius;
+		ballPath->Points[1]->X += ballRadius;
+		ballAdjustXLeft = false;
 		pArea = gameArena->Player2->GetCollisionLine();
 	}
 	if( pArea != 0 )
@@ -107,6 +115,7 @@ void Ball::Update()
 			*/
 			Angle* a = pArea->Reflection( ballPath );
 			ballDirection->Set( a->ToDegrees() );
+			ballPosition->X += (!ballAdjustXLeft ? (pContact->X - ballRadius - ballPosition->X) * 2.0f : (ballPosition->X - ballRadius - pContact->X) * -2.0f);
 			delete a;
 
 		}
@@ -119,5 +128,5 @@ void Ball::Update()
 
 void Ball::Render()
 {
-	spEllipse( ballPosition->X, ballPosition->Y, -1, 6, 6, spGetFastRGB( 255, 255, 255 ) );
+	spEllipse( ballPosition->X, ballPosition->Y, -1, ballRadius * 2, ballRadius * 2, spGetFastRGB( 255, 255, 255 ) );
 }
