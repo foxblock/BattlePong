@@ -5,6 +5,7 @@
 #include "debugstage.h"
 //#include "../Shaders/greyscale.h"
 //#include "../Shaders/blur.h"
+#include "../Shaders/scanlines.h"
 
 int Menu::selectedSway[16] = { -2, -1, -1,
 																0, 0, 0,
@@ -124,9 +125,9 @@ void Menu::Render()
 	spFontDraw( 10 + ( selectedItem == 4 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 4 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 
-	// Shader* shader = new ShaderBlur(); // new ShaderGreyscale();
-	// shader->Apply( spGetRenderTarget() );
-	// delete shader;
+	Shader* shader = new ShaderScanlines(); // ShaderBlur(); // ShaderGreyscale();
+	shader->Apply( spGetRenderTarget() );
+	delete shader;
 
 }
 

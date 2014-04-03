@@ -285,6 +285,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Shaders\scanlines.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Shaders\shader.cpp"
 				>
 			</File>
@@ -424,6 +428,10 @@
 			</File>
 			<File
 				RelativePath=".\Library\polygon.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Shaders\scanlines.h"
 				>
 			</File>
 			<File

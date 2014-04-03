@@ -5,6 +5,8 @@
 #include "../Transitions/strips.h" // fade.h"
 #include "player.h"
 
+#include "../Shaders/scanlines.h"
+
 void DebugStage::Begin()
 {
 	playArena = new Arena();
@@ -46,6 +48,10 @@ void DebugStage::Update()
 void DebugStage::Render()
 {
 	playArena->Render();
+
+	Shader* shader = new ShaderScanlines(); // ShaderBlur(); // ShaderGreyscale();
+	shader->Apply( spGetRenderTarget() );
+	delete shader;
 }
 
 bool DebugStage::StageIsTransition()

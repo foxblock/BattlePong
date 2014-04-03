@@ -10,7 +10,7 @@ Arena::Arena()
 	FloorY = Framework::System->GetDisplayHeight() - 20;
 	Player1WallX = 0;
 	Player2WallX = Framework::System->GetDisplayWidth();
-	PlayerFromWallX = 10;
+	PlayerFromWallX = 20;
 
 	PlayBall = new Ball( this );
 	Player1 = 0;
