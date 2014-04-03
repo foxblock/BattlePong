@@ -3,10 +3,14 @@
 #include "../Framework/framework.h"
 #include "menu.h"
 #include "../Transitions/strips.h" // fade.h"
+#include "player.h"
 
 void DebugStage::Begin()
 {
 	playArena = new Arena();
+	playArena->Player1 = new Player( playArena, true, PlayerInputSource::LOCAL_INPUT );
+	playArena->Player2 = new Player( playArena, false, PlayerInputSource::NO_INPUT );
+
 }
 
 void DebugStage::Pause()
@@ -27,18 +31,11 @@ void DebugStage::EventOccurred(Event *e)
 	{
 		if( e->Data.Keyboard.keysym.sym == SDLK_ESCAPE )
 		{
-			//delete Framework::System->ProgramStages->Pop();
-			Framework::System->ProgramStages->Push( new TransitionStrips( 40, 12 ) );
-		}
-		if( e->Data.Keyboard.keysym.sym == SDLK_HOME )
-		{
-			//ballVelocity = ballVelocity - 0.5f;
-		}
-		if( e->Data.Keyboard.keysym.sym == SDLK_END )
-		{
-			//ballVelocity = ballVelocity + 0.5f;
+			Framework::System->ProgramStages->Push( new TransitionStrips( 40, 24 ) );
+			return;
 		}
 	}
+	playArena->EventOccurred( e );
 }
 
 void DebugStage::Update()

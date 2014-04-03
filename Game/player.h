@@ -1,26 +1,33 @@
 
 #pragma once
 
+#include "input/iinput.h"
+
 #ifndef Arena
 class Arena;
 #endif
 
 #define PLAYER_MAX_HEALTH			10
 
-#define PLAYER_CONTROLS_NONE	0
-#define PLAYER_CONTROLS_UP		1
-#define PLAYER_CONTROLS_DOWN	2
-#define PLAYER_CONTROLS_SEND	4
-#define PLAYER_CONTROLS_USEA	8
-#define PLAYER_CONTROLS_USEB	16
-#define PLAYER_CONTROLS_USEC	32
+namespace PlayerInputSource
+{
+	enum InputSources
+	{
+		NO_INPUT = 0,
+		LOCAL_INPUT = 1,
+		COMPUTER_AI_EASY = 2,
+		COMPUTER_AI_MEDIUM = 3,
+		COMPUTER_AI_HARD = 4,
+		NETWORK = 5
+	};
+};
 
 class Player
 {
 	private:
 		Arena* gameArena;
 		float reboundDirection;
-
+		IInput* InputSource;
 
 	public:
 		int Health;
@@ -28,11 +35,13 @@ class Player
 		bool FacesLeft;
 		int PowerUps[3];
 
-		Player(Arena* PlayingArena, bool LeftSide);
+
+		Player(Arena* PlayingArena, bool LeftSide, PlayerInputSource::InputSources Source);
+		void Update();
 		void Render();
+
+		IInput* GetInputSource();
 		bool DoesCollideWithBall();
 		float GetCollisionReboundDirection();
-
-		virtual int GetPlayerInput();
 
 };

@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "../Framework/event.h"
+
 #ifndef Player
 class Player;
 #endif
@@ -24,6 +26,8 @@ class Arena
 		Ball* PlayBall;
 
 		Arena();
+
+		void EventOccurred(Event *e);
 		void Update();
 		void Render();
 

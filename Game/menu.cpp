@@ -3,7 +3,8 @@
 #include "../Framework/framework.h"
 #include "../Transitions/fade.h"
 #include "debugstage.h"
-#include "../Shaders/greyscale.h"
+//#include "../Shaders/greyscale.h"
+//#include "../Shaders/blur.h"
 
 int Menu::selectedSway[16] = { -2, -1, -1,
 																0, 0, 0,
@@ -123,11 +124,10 @@ void Menu::Render()
 	spFontDraw( 10 + ( selectedItem == 4 ? selectedSway[selectedSwayIndex] : 0 ), yPos, -1, "Quit", ( selectedItem == 4 ? fontMenuSelected : fontMenuUnselected ) );
 	yPos += 24;
 
-	/*
-	ShaderGreyscale* shader = new ShaderGreyscale();
-	shader->Apply( spGetRenderTarget() );
-	delete shader;
-	*/
+	// Shader* shader = new ShaderBlur(); // new ShaderGreyscale();
+	// shader->Apply( spGetRenderTarget() );
+	// delete shader;
+
 }
 
 bool Menu::StageIsTransition()

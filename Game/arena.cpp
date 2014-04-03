@@ -13,13 +13,33 @@ Arena::Arena()
 	PlayerFromWallX = 10;
 
 	PlayBall = new Ball( this );
-	Player1 = new Player( this, true );
-	Player2 = new Player( this, false );
+	Player1 = 0;
+	Player2 = 0;
+}
+
+void Arena::EventOccurred( Event *e )
+{
+	if( Player1 != 0 )
+	{
+		Player1->GetInputSource()->EventOccurred(e);
+	}
+	if( Player2 != 0 )
+	{
+		Player2->GetInputSource()->EventOccurred(e);
+	}
 }
 
 void Arena::Update()
 {
 	PlayBall->Update();
+	if( Player1 != 0 )
+	{
+		Player1->Update();
+	}
+	if( Player2 != 0 )
+	{
+		Player2->Update();
+	}
 }
 
 void Arena::Render()
@@ -37,7 +57,13 @@ void Arena::Render()
 		spRectangle( Framework::System->GetDisplayWidth() / 2, (Framework::System->GetDisplayHeight() / 10) * y, -1, 4, Framework::System->GetDisplayHeight() / 15, spGetFastRGB( 255, 255, 255 ) );
 	}
 
+	if( Player1 != 0 )
+	{
+		Player1->Render();
+	}
+	if( Player2 != 0 )
+	{
+		Player2->Render();
+	}
 	PlayBall->Render();
-	Player1->Render();
-	Player2->Render();
 }

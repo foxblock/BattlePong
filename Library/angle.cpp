@@ -35,7 +35,7 @@ float Angle::ToDegrees()
 
 float Angle::ToRadians()
 {
-	return curAngle * (180.0f / M_PI);
+	return curAngle * M_DEGRADCONV; // (180.0f / M_PI);
 }
 
 float Angle::ToRadiansSparrow()

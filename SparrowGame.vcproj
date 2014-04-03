@@ -229,6 +229,30 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Game\input\input_ai_easy.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_ai_hard.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_ai_medium.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_local.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_network.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_none.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Library\line.cpp"
 				>
 			</File>
@@ -340,6 +364,34 @@
 			</File>
 			<File
 				RelativePath=".\Shaders\greyscale.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\iinput.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_ai_easy.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_ai_hard.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_ai_medium.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_local.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_network.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game\input\input_none.h"
 				>
 			</File>
 			<File

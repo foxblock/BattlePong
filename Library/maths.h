@@ -4,8 +4,11 @@
 #include <cmath>
 
 #ifndef M_PI
-#define M_PI      3.141592654f
+#define M_PI						3.141592654f
 #endif
+
+#define M_DEGRADCONV		57.2957795f
+
 class Maths
 {
 	public:
