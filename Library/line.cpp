@@ -1,5 +1,6 @@
 
 #include "line.h"
+#include "maths.h"
 
 Line::Line( Vector2* A, Vector2* B )
 {
@@ -68,16 +69,26 @@ Vector2* Line::GetIntersection( Line* IntersectsWith )
 
 	if( lx[0] == lx[1] )
 	{
-		tmp = (m[1] * lx[0]) + b[1];
-		if( (tmp >= ly[0] && tmp <= ly[1]) || (tmp <= ly[0] && tmp >= ly[1]) )
+		if( Maths::Min(ix[0], ix[1]) <= lx[0]  && Maths::Max(ix[0], ix[1]) >= lx[0] )
 		{
-			return new Vector2( lx[0], tmp );
+			tmp = (m[1] * lx[0]) + b[1];
+			if( (tmp >= ly[0] && tmp <= ly[1]) || (tmp <= ly[0] && tmp >= ly[1]) )
+			{
+				return new Vector2( lx[0], tmp );
+			}
+		} else {
+			return 0;
 		}
 	} else if ( ix[0] == ix[1] ) {
-		tmp = (m[0] * ix[0]) + b[0];
-		if( (tmp >= iy[0] && tmp <= iy[1]) || (tmp <= iy[0] && tmp >= iy[1]) )
+		if( Maths::Min(lx[0], lx[1]) <= ix[0]  && Maths::Max(lx[0], lx[1]) >= ix[0] )
 		{
-			return new Vector2( ix[0], tmp );
+			tmp = (m[0] * ix[0]) + b[0];
+			if( (tmp >= iy[0] && tmp <= iy[1]) || (tmp <= iy[0] && tmp >= iy[1]) )
+			{
+				return new Vector2( ix[0], tmp );
+			}
+		} else {
+			return 0;
 		}
 	} else {
 		tmp = (b[1] - b[0]) / (m[0] - m[1]);

@@ -2,6 +2,7 @@
 #pragma once
 
 #include "input/iinput.h"
+#include "../Library/line.h"
 
 #ifndef Arena
 class Arena;
@@ -26,8 +27,8 @@ class Player
 {
 	private:
 		Arena* gameArena;
-		float reboundDirection;
-		IInput* InputSource;
+		IInput* inputSource;
+		int targetHealth;
 
 	public:
 		int Health;
@@ -41,7 +42,7 @@ class Player
 		void Render();
 
 		IInput* GetInputSource();
-		bool DoesCollideWithBall();
-		float GetCollisionReboundDirection();
+		void TakeDamage(int Damage);
+		Line* GetCollisionLine();
 
 };

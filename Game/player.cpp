@@ -12,7 +12,8 @@
 
 Player::Player( Arena* PlayingArena, bool LeftSide, PlayerInputSource::InputSources Source )
 {
-	Health = PLAYER_MAX_HEALTH;
+	targetHealth = PLAYER_MAX_HEALTH;
+	Health = 1;
 	Position = ((PlayingArena->FloorY - PlayingArena->RoofY) / 2) + PlayingArena->RoofY;	// Centre
 	gameArena = PlayingArena;
 	FacesLeft = !LeftSide;
@@ -23,29 +24,29 @@ Player::Player( Arena* PlayingArena, bool LeftSide, PlayerInputSource::InputSour
 	switch( Source )
 	{
 		case PlayerInputSource::NO_INPUT:
-			InputSource = new InputNone();
+			inputSource = new InputNone();
 			break;
 		case PlayerInputSource::LOCAL_INPUT:
-			InputSource = new InputLocal( (LeftSide ? 1 : 2), true );		// TODO: Fix if Single player or not
+			inputSource = new InputLocal( (LeftSide ? 1 : 2), true );		// TODO: Fix if Single player or not
 			break;
 		case PlayerInputSource::COMPUTER_AI_EASY:
-			InputSource = new InputAIEasy();
+			inputSource = new InputAIEasy();
 			break;
 		case PlayerInputSource::COMPUTER_AI_MEDIUM:
-			InputSource = new InputAIMedium();
+			inputSource = new InputAIMedium();
 			break;
 		case PlayerInputSource::COMPUTER_AI_HARD:
-			InputSource = new InputAIHard();
+			inputSource = new InputAIHard();
 			break;
 		case PlayerInputSource::NETWORK:
-			InputSource = new InputNetwork();
+			inputSource = new InputNetwork();
 			break;
 	}
 }
 
 void Player::Update()
 {
-	int Inputs = InputSource->GetPlayerInput();
+	int Inputs = inputSource->GetPlayerInput();
 
 	if( (Inputs & PLAYER_CONTROLS_UP) != 0 )
 	{
@@ -63,28 +64,40 @@ void Player::Update()
 			Position = gameArena->FloorY - 50;
 		}
 	}
+	if( targetHealth < Health )
+	{
+		Health--;
+	}
+	if( targetHealth > Health )
+	{
+		Health++;
+	}
 }
 
 void Player::Render()
 {
 	int xPos = (FacesLeft ? gameArena->Player2WallX - gameArena->PlayerFromWallX : gameArena->Player1WallX + gameArena->PlayerFromWallX);
-	spSetHorizontalOrigin( SP_CENTER );
+	spSetHorizontalOrigin( (FacesLeft ? SP_RIGHT : SP_LEFT) );
 	spSetVerticalOrigin( SP_CENTER );
 	spRectangle( xPos, Position, -1, 8, 100, spGetFastRGB( 255, 255, 255 ) );
 }
 
 IInput* Player::GetInputSource()
 {
-	return InputSource;
+	return inputSource;
 }
 
-bool Player::DoesCollideWithBall()
+void Player::TakeDamage( int Damage )
 {
-	return false;
+	targetHealth -= Damage;
+	if( targetHealth < 0 )
+	{
+		targetHealth = 0;
+	}
 }
 
-float Player::GetCollisionReboundDirection()
+Line* Player::GetCollisionLine()
 {
-	// Calculated when checking collision
-	return reboundDirection;
+	int xPos = (FacesLeft ? gameArena->Player2WallX - gameArena->PlayerFromWallX : gameArena->Player1WallX + gameArena->PlayerFromWallX);
+	return new Line( xPos, Position - 50, xPos, Position + 50 );
 }
